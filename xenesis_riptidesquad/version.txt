@@ -1,0 +1,50 @@
+--Version Notes--
+Release 1.0.2:
+•Fixed an issue causing the mod to un-load when you unlocked "Riptide Complete" without re-loading the game and then went to the modloader options. (Thanks narD)
+•Updated some text and layout in Mod Options.
+•Added mirrored Vortex Artillery graphics for the counter-clockwise version to make them easier to tell apart.
+
+Release 1.0.1:
+•Added an option to reverse the direction of the Vortex Artillery. Pick from the mod options "Clockwise" or "Anti-Clockwise".
+•Combined the option to use the "Crush Artillery" with the direction option.
+•Cleaned up some Vortex Artillery code.
+
+Release 1.0:
+•Vortex Artillery - "Centre Smoke" upgrade changed to Smoke = true/Centre Damage = 0 from Smoke = true/Centre Damage = 1
+•Added mod option to use the beta Vortex Artillery weapon design from WIP1. Renamed the beta weapon "Crush Artillery"
+--Note that this weapon is a little unpredictable and comes as-is
+•Unit weapons graphics added
+•Artillery shot graphic added
+•Artillery shot explosion graphic added
+•New spear and artillery animations
+•Achievement support:
+--3 Squad Achievements
+--3 Victory Achivements to track clears like the base game
+--1 Perfect Score Achievement
+•Added mod option to add the squad weapons and the crush artillery to the item drop pool
+•Added a BONUS. Clear the squad achivements and win the game at least once to see!
+
+WIP3 with squad art:
+•Djinn's Unit Graphics Added
+
+WIP3:
+•Updated logic of Prime Harpoon to prevent an unexpected case when both a collision and a death would happen.
+•Updated Prime Harpoon animation in logic.
+•Fixed Kick-Off Charge not gaining a bonus when kicking off Mountain tiles.
+
+WIP2:
+•Increased damage of Prime Harpoon upgrade.
+•Kick-Off Charge now inflicts +1 damage when kicking off Cities and Pawns.
+•Kick-Off Charge upgrades now "1/Building Kick-Off" and "2/+2 Kick Damage".
+•Vortex Artillery firing design changed.
+•Vortex Artillery centre now inflicts 1 damage.
+•Vortex Artillery upgrades changed to "2/+2 Outer Ring Damage" and "2/Centre Smoke".
+
+WIP1:
+•Initial Release.
+
+Thanks:
+•Djinn for the excellent unit sprites
+•Lemonymous for coding support and APIs
+•kartoFlane for the modloader, coding support and APIs
+•tosx and NotSoLoneWolf for coding support
