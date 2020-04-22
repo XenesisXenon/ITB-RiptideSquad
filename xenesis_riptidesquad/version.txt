@@ -1,4 +1,9 @@
 --Version Notes--
+Release 1.0.3:
+•Fixes to be compatible with the new version of Into The Breach (1.2.21) and the Mod Loader (2.5.1). These are now the minimum versions for the releases of this mod going forward, and for compatibility/bug reporting.
+•Added a missing description.
+•Updated the Mod Icon to feature all three mechs.
+
 Release 1.0.2:
 •Fixed an issue causing the mod to un-load when you unlocked "Riptide Complete" without re-loading the game and then went to the modloader options. (Thanks narD)
 •Updated some text and layout in Mod Options.

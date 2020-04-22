@@ -1,6 +1,6 @@
 --INIT.LUA--
 
-local description = "A squad built with Pinnacle Grav tech designed to stop the Vek by crushing them on themselves. A force as unstoppable as the ocean currents."
+local description = "A rough riding squad built with Pinnacle Grav tech that stops the Vek by crushing them on themselves. A force as unstoppable as the ocean currents."
 local icon = "img/mod_icon2.png"
 
 local function getModOptions(mod)
@@ -177,9 +177,11 @@ end
 return {
 	id = "xen_PushSquad",
 	name = "Riptide Squad",
-	version = "1.0.2",
+	version = "1.0.3",
+	modApiVersion = "2.5.1",
+	description = "A rough riding squad built with Pinnacle Grav tech that stops the Vek by crushing them on themselves.",
 	requirements = {"kf_ModUtils"},--Not a list of mods needed for our mod to function, but rather the mods that we need to load before ours to maintain compability 
 	init = init,
 	load = load,
-	icon = "img/mod_icon2.png",
+	icon = "img/mod_icon.png",
 }

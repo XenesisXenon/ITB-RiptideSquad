@@ -22,7 +22,6 @@ xen_Prime_Harpoon = Skill:new{
 	PowerCost = 1,
 	Upgrades = 2,
 	UpgradeCost = { 2 , 3 },
-	UpgradeList = {"+1 Range", "+2 Damage"},
 	LaunchSound = "/weapons/sword",
 	Rarity = 2,
 	TipImage = {
@@ -117,6 +116,8 @@ xen_Prime_Harpoon_AB = xen_Prime_Harpoon:new{
 	}	
 }
 
+Weapon_Texts.xen_Prime_Harpoon_Upgrade1 = "+1 Range"
+Weapon_Texts.xen_Prime_Harpoon_Upgrade2 = "+2 Damage"
 
 ANIMS.xen_exploharpoon1_0 = ANIMS.explospear1_0:new{	Time = 0.03, }
 ANIMS.xen_exploharpoon2_0 = ANIMS.xen_exploharpoon1_0:new{ 	Image = "effects/spear2_U.png", }
@@ -174,7 +175,6 @@ xen_Kickoff_Charge = Brute_Beetle:new{
 	PowerCost = 1,
 	Upgrades = 2,
 	UpgradeCost = {1,3},
-	UpgradeList = {"Building Kick-Off", "+2 Kick Damage"},
 	LaunchSound = "/weapons/charge",
 	ImpactSound = "/weapons/charge_impact",
 	Rarity = 2,
@@ -299,6 +299,9 @@ xen_Kickoff_Charge_AB = xen_Kickoff_Charge:new{
 	}	
 }
 
+Weapon_Texts.xen_Kickoff_Charge_Upgrade1 = "Building Kick-Off"
+Weapon_Texts.xen_Kickoff_Charge_Upgrade2 = "+2 Kick Damage"
+
 --Vortex Artillery (Ranged)--
 xen_Vortex_Artillery = LineArtillery:new{
 	Name = "Vortex Artillery",
@@ -318,7 +321,6 @@ xen_Vortex_Artillery = LineArtillery:new{
 	LaunchSound = "/weapons/gravwell",
 	Upgrades = 2,
 	UpgradeCost = {2,2},
-	UpgradeList = {"Centre Smoke", "+2 Outer Damage"},
 	Rarity = 2,
 	TipImage = {
 		Unit = Point(2,4),
@@ -414,6 +416,11 @@ xen_Vortex_Artillery_Counter_AB = xen_Vortex_Artillery_AB:new{
 	Direction = -1,
 }
 
+Weapon_Texts.xen_Vortex_Artillery_Upgrade1 = "Centre Smoke"
+Weapon_Texts.xen_Vortex_Artillery_Upgrade2 = "+2 Outer Damage"
+Weapon_Texts.xen_Vortex_Artillery_Counter_Upgrade1 = Weapon_Texts.xen_Vortex_Artillery_Upgrade1
+Weapon_Texts.xen_Vortex_Artillery_Counter_Upgrade2 = Weapon_Texts.xen_Vortex_Artillery_Upgrade2
+
 ANIMS.xen_VortexBlast = ANIMS.PulseBlast:new{
 	Image = "effects/xen_explopulse_vortex.png",
 	Time = 0.035,
@@ -439,7 +446,6 @@ xen_Crush_Artillery = LineArtillery:new{
 	LaunchSound = "/weapons/gravwell",
 	Upgrades = 2,
 	UpgradeCost = {2,2},
-	UpgradeList = {"+2 Area", "+2 Damage"},
 	Rarity = 3,
 	TipImage = {
 		Unit = Point(2,3),
@@ -524,3 +530,6 @@ xen_Crush_Artillery_AB = xen_Crush_Artillery:new{
 		Target = Point(2,1)
 	}
 }
+
+Weapon_Texts.xen_Crush_Artillery_Upgrade1 = "+2 Area"
+Weapon_Texts.xen_Crush_Artillery_Upgrade2 = "+2 Damage"
