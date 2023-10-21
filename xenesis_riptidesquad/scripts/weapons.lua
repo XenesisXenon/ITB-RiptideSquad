@@ -19,7 +19,7 @@ xen_Prime_Harpoon = Skill:new{
 	Damage = 1,
 	Push = 1,
 	Acid = 0,
-	PowerCost = 1,
+	PowerCost = 0,
 	Upgrades = 2,
 	UpgradeCost = { 2 , 3 },
 	LaunchSound = "/weapons/sword",
@@ -172,7 +172,7 @@ xen_Kickoff_Charge = Brute_Beetle:new{
 	DamageKick = 1,
 	DamageBuilding = 0,
 	PathSize = INT_MAX,
-	PowerCost = 1,
+	PowerCost = 0,
 	Upgrades = 2,
 	UpgradeCost = {1,3},
 	LaunchSound = "/weapons/charge",
@@ -264,7 +264,7 @@ function xen_Kickoff_Charge:GetSkillEffect(p1,p2)
 end
 
 xen_Kickoff_Charge_A = xen_Kickoff_Charge:new{
-	UpgradeDescription = "Kick off a building to do extra damage. Buildings are no longer damaged by a kick off.",
+	UpgradeDescription = "Kick off a building to do extra damage without damaging it.",
 	BuildingDamage = false,
 	DamageBuilding = 1,
 	TipImage = {
@@ -307,11 +307,11 @@ xen_Vortex_Artillery = LineArtillery:new{
 	Name = "Vortex Artillery",
 	Class = "Ranged",
 	Icon = "weapons/xen_weapon_ranged_vortex.png",
-	Description = "Pull adjacent targets clockwise around the centre target.",
+	Description = "Pull adjacent targets around the centre target.",
+	TwoClick = true,
 	Sound = "",
 	Explosion = "xen_VortexBlast",
 	UpShot = "effects/xen_shotup_vortex.png",
-	PowerCost = 1,
 	BounceAmount = 1,
 	Damage = 1,
 	Direction = 1,
@@ -320,11 +320,13 @@ xen_Vortex_Artillery = LineArtillery:new{
 	CentreSmoke = false,
 	LaunchSound = "/weapons/gravwell",
 	Upgrades = 2,
-	UpgradeCost = {2,2},
+	PowerCost = 0,
+	UpgradeCost = {1,3},
 	Rarity = 2,
 	TipImage = {
 		Unit = Point(2,4),
 		Target = Point(2,2),
+		Second_Click = Point(0,7),
 		Enemy = Point(2,2),
 		Enemy2 = Point(2,1),
 		Enemy3 = Point(3,2),
@@ -333,8 +335,31 @@ xen_Vortex_Artillery = LineArtillery:new{
 	}
 }
 
-function xen_Vortex_Artillery:GetSkillEffect(p1,p2)
+function xen_Vortex_Artillery:GetSkillEffect(p1, p2)
 	local ret = SkillEffect()
+	local dam = SpaceDamage(p2, self.DamageCentre)
+	if self.CentreSmoke then
+		dam.iSmoke = EFFECT_CREATE
+	end
+	ret:AddArtillery(dam,self.UpShot)
+	for dir = 0,3 do
+		ret:AddDamage(SpaceDamage(p2 + DIR_VECTORS[dir], self.DamageOuter))
+	end
+	return ret
+end
+
+function xen_Vortex_Artillery:GetSecondTargetArea(p1, p2)
+	local ret = PointList()
+	local corners = { Point(0,6), Point(0,7), Point(1,6), Point(1,7), Point(6,0), Point(6,1), Point(7,0), Point(7,1),  }
+	for i = 1, 8 do
+		if corners[i] ~= p2 then ret:push_back(corners[i]) end
+	end
+	return ret
+end
+
+function xen_Vortex_Artillery:GetFinalEffect(p1, p2, p3)
+	local ret = SkillEffect()
+	local spin = (p3.x<3 and -1) or 1
 	local damagecount = 0
 
 	local damage = SpaceDamage(p2, self.DamageCentre)
@@ -344,7 +369,7 @@ function xen_Vortex_Artillery:GetSkillEffect(p1,p2)
 	--Centre--
 	ret:AddBounce(p1, -2)
 	damage.sAnimation = self.Explosion
-	ret:AddArtillery(damage,self.UpShot)
+	ret:AddArtillery(damage,(spin == 1 and "effects/xen_shotup_vortex.png") or "effects/xen_shotup_vortex_counter.png" )
 	ret:AddBounce(p2, self.BounceAmount)
 	--Achievment
 	if Board:GetPawn(damage.loc) ~= nil and Board:GetPawn(damage.loc):GetTeam() == TEAM_ENEMY then
@@ -353,8 +378,8 @@ function xen_Vortex_Artillery:GetSkillEffect(p1,p2)
 
 	for dir = DIR_START,DIR_END do
 		damage = SpaceDamage(p2 + DIR_VECTORS[dir], self.DamageOuter)
-		damage.iPush = (dir+self.Direction)%4
-		damage.sAnimation = "airpush_".. ((dir+self.Direction)%4)
+		damage.iPush = (dir+spin)%4
+		damage.sAnimation = "airpush_".. ((dir+spin)%4)
 		ret:AddDamage(damage)
 		--Achievment
 		if Board:GetPawn(damage.loc) ~= nil and Board:GetPawn(damage.loc):GetTeam() == TEAM_ENEMY then
@@ -371,6 +396,7 @@ function xen_Vortex_Artillery:GetSkillEffect(p1,p2)
 		]])
 		end
 	end
+	
 	return ret
 end
 
@@ -394,7 +420,7 @@ xen_Vortex_Artillery_AB = xen_Vortex_Artillery:new{
 	CentreSmoke = true
 }
 
-xen_Vortex_Artillery_Counter = xen_Vortex_Artillery:new{
+--[[xen_Vortex_Artillery_Counter = xen_Vortex_Artillery:new{
 	Icon = "weapons/xen_weapon_ranged_vortex_counter.png",
 	UpShot = "effects/xen_shotup_vortex_counter.png",
 	Description = "Pull adjacent targets anti-clockwise around the centre target.",
@@ -414,7 +440,7 @@ xen_Vortex_Artillery_Counter_AB = xen_Vortex_Artillery_AB:new{
 	Icon = "weapons/xen_weapon_ranged_vortex_counter.png",
 	UpShot = "effects/xen_shotup_vortex_counter.png",
 	Direction = -1,
-}
+}]]
 
 Weapon_Texts.xen_Vortex_Artillery_Upgrade1 = "Centre Smoke"
 Weapon_Texts.xen_Vortex_Artillery_Upgrade2 = "+2 Outer Damage"
@@ -436,7 +462,7 @@ xen_Crush_Artillery = LineArtillery:new{
 	Description = "Pull adjacent targets into the centre. Targets are pulled clock-wise from the back.",
 	Sound = "",
 	Explosion = "",
-	PowerCost = 1,
+	PowerCost = 0,
 	BounceAmount = 1,
 	BigSize = 0,
 	Damage = 0,
@@ -445,7 +471,7 @@ xen_Crush_Artillery = LineArtillery:new{
 	BigSize = 0,
 	LaunchSound = "/weapons/gravwell",
 	Upgrades = 2,
-	UpgradeCost = {2,2},
+	UpgradeCost = {1,3},
 	Rarity = 3,
 	TipImage = {
 		Unit = Point(2,3),
