@@ -95,7 +95,7 @@ local function init(self)
 	require(scriptPath .."achievements")
 	require(scriptPath .."achievementTriggers"):init(options)	
 	local achvApi = require(scriptPath .."/achievements/api")	
-	if require(scriptPath .."achievements/api"):GetChievoStatus("xen_riptide_complete") then
+	if modApi.achievements:isComplete("xen_PushSquad","xen_riptide_complete") then--require(scriptPath .."achievements/api"):GetChievoStatus("xen_riptide_complete") then
 		modApi:addGenerationOption(
 			"xen_ForceEnable",
 			"Force Amp Mode",
@@ -113,10 +113,10 @@ local function init(self)
 	modApi:addGenerationOption(
 		"xen_VortexDirection",
 		"Vortex Artillery Weapon",
-		"Pick the weapon of the Whirlpool Mech, which applies when you start a new game.\n\nExperimental crush artillery is from earlier versions of the squad, may work strangely and does not trigger the ranged achievement.\n\nDefault: Vortex Artillery - Clockwise. ",
+		"Pick the weapon of the Whirlpool Mech, which applies when you start a new game.\n\nExperimental crush artillery is from earlier versions of the squad, may work strangely and does not trigger the ranged achievement.\n\nDefault: Vortex Artillery. ",
 		{
-			strings = { "Vortex Artillery - Clockwise","Vortex Artillery - Anti-clockwise", "Experimental Crush Artillery"},
-			values = {1,2,3},
+			strings = { "Vortex Artillery", "Experimental Crush Artillery"},		--,"Vortex Artillery - Anti-clockwise"
+			values = {1,2},
 			value = 1,
 		}
 	)
@@ -137,12 +137,12 @@ local function init(self)
 		name = xen_Vortex_Artillery.Name .. " can be found",
 		desc = "Adds Vortex Artillery to the store and equipment drop pool.",
 	})
-	shop:addWeapon({
+	--[[shop:addWeapon({
 		id = "xen_Vortex_Artillery_Counter",
 		name = xen_Vortex_Artillery.Name .. " (Anti-clockwise) can be found",
 		desc = "Adds Vortex Artillery (Anti-clockwise) to the store and equipment drop pool.",
 		default = false,
-	})
+	})]]
 	shop:addWeapon({
 		id = "xen_Crush_Artillery",
 		name = xen_Crush_Artillery.Name .. " can be found",
@@ -159,14 +159,14 @@ local function load(self, options, version)
 	local SquadRanged = "xen_PSShoveMech"
 	local fmode = false
 
-	if require(scriptPath .."achievements/api"):GetChievoStatus("xen_riptide_complete") and options["xen_ForceEnable"].enabled then
+	if modApi.achievements:isComplete("xen_PushSquad","xen_riptide_complete") and options["xen_ForceEnable"].enabled then
 			fmode = options["xen_ForceEnable"].enabled
 			SquadBrute = "xen_PSDeployMech_Force"
 	end
 	if options["xen_VortexDirection"].value == 2 then
-		SquadRanged = "xen_PSShoveMech_Counter"
-	elseif options["xen_VortexDirection"].value == 3 then
-		SquadRanged = "xen_PSShoveMech_Crush"
+		SquadRanged = "xen_PSShoveMech_Crush"		--"xen_PSShoveMech_Counter"
+	--elseif options["xen_VortexDirection"].value == 3 then
+		--SquadRanged = "xen_PSShoveMech_Crush"
 	end
 	modApi:addSquadTrue({"Riptide","xen_PSHarpoonMech", SquadBrute, SquadRanged}, "Riptide", description, self.resourcePath .. icon)
 	require(self.scriptPath .."shop"):load(options)

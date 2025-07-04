@@ -48,7 +48,7 @@ AddPawn("xen_PSShoveMech")
 
 --For Mod Option compatibility
 
-xen_PSShoveMech_Counter = {
+--[[xen_PSShoveMech_Counter = {
 	Name = "Whirlpool Mech",
 	Class = "Ranged",
 	Image = "xen_WhirlpoolMech",
@@ -60,7 +60,7 @@ xen_PSShoveMech_Counter = {
 	ImpactMaterial = IMPACT_METAL,
 	Massive = true
 }
-AddPawn("xen_PSShoveMech_Counter")
+AddPawn("xen_PSShoveMech_Counter")]]
 
 xen_PSShoveMech_Crush = {
 	Name = "Whirlpool Mech",
