@@ -177,7 +177,7 @@ end
 return {
 	id = "xen_PushSquad",
 	name = "Riptide Squad",
-	version = "1.0.3",
+	version = "1.0.4",
 	modApiVersion = "2.5.1",
 	description = "A rough riding squad built with Pinnacle Grav tech that stops the Vek by crushing them on themselves.",
 	requirements = {"kf_ModUtils"},--Not a list of mods needed for our mod to function, but rather the mods that we need to load before ours to maintain compability 
